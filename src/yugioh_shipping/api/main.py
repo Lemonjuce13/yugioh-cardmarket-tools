@@ -20,7 +20,7 @@ from pydantic import BaseModel
 
 from ..core.config import Config, default_config_path, load_config, save_config
 from ..core.layouts import get_layout, list_layouts
-from ..core.models import Address, Order
+from ..core.models import Address, Order, normalize_porto_code
 from ..core.pipeline import build_pdf
 from ..core.preview import render_page
 from ..core.sheets import get_sheet, list_sheets
@@ -57,7 +57,7 @@ def _to_orders(items: list[OrderIn]) -> list[Order]:
     orders: list[Order] = []
     for it in items:
         tracking = base64.b64decode(it.tracking_label_b64) if it.tracking_label_b64 else None
-        orders.append(Order(recipient=Address(lines=it.recipient), porto_code=it.porto_code, tracking_label=tracking))
+        orders.append(Order(recipient=Address(lines=it.recipient), porto_code=normalize_porto_code(it.porto_code), tracking_label=tracking))
     return orders
 
 

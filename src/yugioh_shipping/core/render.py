@@ -16,7 +16,7 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 from reportlab.pdfgen import canvas
 
 from .layouts import LayoutSpec
-from .models import Order
+from .models import Order, normalize_porto_code
 from .sheets import Rect, SheetSpec
 
 
@@ -67,7 +67,7 @@ def _draw_porto(c: canvas.Canvas, code: str, rect_pt: tuple[float, float, float,
     porto_baseline = code_baseline + leading
     c.setFont(font, size)
     c.drawString(x, porto_baseline, "#PORTO")
-    c.drawString(x, code_baseline, code.strip().upper())
+    c.drawString(x, code_baseline, normalize_porto_code(code) or "")
     return porto_baseline + size  # approx top of the block
 
 

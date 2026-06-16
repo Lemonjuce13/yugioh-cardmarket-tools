@@ -42,3 +42,22 @@ class Order:
     # optional metadata (useful for cross-referencing / future features)
     sale_id: str | None = None
     shipping_method: str | None = None
+
+
+def normalize_porto_code(raw: str | None) -> str | None:
+    """Extract just the postage code from user input.
+
+    Accepts the bare code ("CVNKP8VN") or the whole block exactly as Deutsche Post / DHL
+    presents it -- e.g. "#PORTO\\nCVNKP8VN" or "#PORTO CVNKP8VN". The literal ``#PORTO`` marker
+    (any case, with or without the leading ``#``) is removed so it is never rendered twice.
+    Returns the uppercased code, or ``None`` if nothing meaningful is left.
+    """
+    if not raw:
+        return None
+    tokens = [
+        part
+        for part in str(raw).replace("\r", " ").replace("\n", " ").split()
+        if part.upper().lstrip("#") != "PORTO"
+    ]
+    code = " ".join(tokens).strip().upper()
+    return code or None

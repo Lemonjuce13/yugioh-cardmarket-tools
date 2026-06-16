@@ -5,6 +5,7 @@ __pycache__/
 build/
 dist/
 .pytest_cache/
+
 # generated output
 out/
 *.out.pdf
@@ -21,3 +22,6 @@ Sale*.pdf
 #claude
 .claude/
 CLAUDE.md
+
+#dev tools
+dev.sh

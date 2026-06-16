@@ -22,7 +22,7 @@ import csv
 import json
 from pathlib import Path
 
-from ..core.models import Address, Order
+from ..core.models import Address, Order, normalize_porto_code
 from . import cardmarket
 
 
@@ -48,7 +48,7 @@ def _recipient_from(entry: dict, base: Path) -> Address:
 
 def _entry_to_order(entry: dict, base: Path) -> Order:
     tracking = _resolve(base, entry.get("tracking_label"))
-    porto = (entry.get("porto_code") or "").strip() or None
+    porto = normalize_porto_code(entry.get("porto_code"))
     return Order(
         recipient=_recipient_from(entry, base),
         porto_code=porto,

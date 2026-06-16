@@ -31,7 +31,7 @@ from pathlib import Path
 
 from ..core.config import load_config
 from ..core.layouts import get_layout, list_layouts
-from ..core.models import Address, Order
+from ..core.models import Address, Order, normalize_porto_code
 from ..core.pipeline import build_calibration_pdf, build_pdf
 from ..core.preview import render_page
 from ..core.sheets import get_sheet, list_sheets
@@ -83,12 +83,30 @@ def _orders_from_flags(args) -> list[Order]:
     # apply porto/tracking positionally to the flag-built orders
     for idx, order in enumerate(flag_orders):
         if idx < len(args.porto) and args.porto[idx].strip():
-            order.porto_code = args.porto[idx].strip()
+            order.porto_code = normalize_porto_code(args.porto[idx])
         if idx < len(args.tracking) and args.tracking[idx].strip():
             order.tracking_label = Path(args.tracking[idx].strip())
 
     orders.extend(flag_orders)
     return orders
+
+
+def _read_porto() -> str | None:
+    """Read a porto code, accepting either the bare code or the pasted #PORTO block.
+
+    When the whole block is pasted ("#PORTO\\nCVNKP8VN"), the first input line is just the
+    "#PORTO" marker and the actual code arrives on the next (buffered) line -- consume it here
+    so it doesn't leak into the next prompt. The marker is then stripped from the stored value.
+    """
+    raw = input("Porto code (paste the whole #PORTO block or just the code; blank = none): ").strip()
+    if not raw:
+        return None
+    if raw.upper().lstrip("#").strip() == "PORTO":  # first line was only the marker
+        try:
+            raw = input("  code: ").strip()
+        except EOFError:
+            raw = ""
+    return normalize_porto_code(raw)
 
 
 def _interactive(capacity: int) -> tuple[list[Order], int]:
@@ -115,7 +133,7 @@ def _interactive(capacity: int) -> tuple[list[Order], int]:
                 break
             continue
 
-        porto = input("Porto code (#PORTO), blank if none: ").strip() or None
+        porto = _read_porto()
         track = input("Tracking/franking label PDF, blank if none: ").strip() or None
         orders.append(Order(recipient=addr, porto_code=porto, tracking_label=Path(track) if track else None))
 
@@ -129,6 +147,15 @@ def _interactive(capacity: int) -> tuple[list[Order], int]:
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Entry point. Catches Ctrl+C / Ctrl+D so they exit quietly instead of a traceback."""
+    try:
+        return _run(argv)
+    except (KeyboardInterrupt, EOFError):
+        print("\nCancelled.", file=sys.stderr)
+        return 130  # conventional exit code for SIGINT
+
+
+def _run(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
 
     if args.list_sheets:
