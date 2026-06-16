@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yugioh-shipping"
+version = "0.1.0"
+description = "Generate print-ready DIN A4 shipping-sticker sheets for Cardmarket Yu-Gi-Oh! orders"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "reportlab>=4.0",
+    "pymupdf>=1.24",
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+yugioh-shipping = "yugioh_shipping.cli.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

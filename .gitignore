@@ -1,0 +1,23 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+# generated output
+out/
+*.out.pdf
+stickers.pdf
+calibration.pdf
+preview.png
+
+# pdf inputs
+Briefmarken*.pdf
+envelope*.pdf
+Sale*.pdf
+
+
+#claude
+.claude/
+CLAUDE.md
