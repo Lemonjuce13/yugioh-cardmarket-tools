@@ -9,10 +9,10 @@ from pathlib import Path
 
 import pytest
 
-from yugioh_shipping.core.models import Order
-from yugioh_shipping.core.pipeline import build_pdf
-from yugioh_shipping.core.preview import page_count
-from yugioh_shipping.io import cardmarket
+from postik.core.models import Order
+from postik.core.pipeline import build_pdf
+from postik.core.preview import page_count
+from postik.io import cardmarket
 
 ROOT = Path(__file__).resolve().parents[1]
 # samples live in asset/ (with a fallback to the project root)

@@ -40,7 +40,7 @@ def default_config_path() -> Path:
         base = Path(os.environ.get("APPDATA", Path.home() / "AppData" / "Roaming"))
     else:
         base = Path(os.environ.get("XDG_CONFIG_HOME", Path.home() / ".config"))
-    return base / "yugioh_shipping" / "config.json"
+    return base / "postik" / "config.json"
 
 
 def load_config(path: str | Path | None = None) -> Config:

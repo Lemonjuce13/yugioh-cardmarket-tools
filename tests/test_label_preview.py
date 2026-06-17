@@ -7,12 +7,12 @@ import pytest
 
 from samples import LABEL
 
-from yugioh_shipping.core.label import _aspect_fit, detect_label_bbox, embed_labels
-from yugioh_shipping.core.layouts import DEFAULT
-from yugioh_shipping.core.models import Address, Order
-from yugioh_shipping.core.pipeline import build_pdf
-from yugioh_shipping.core.preview import page_count, render_page
-from yugioh_shipping.core.sheets import AMAZON_A4_4UP as S
+from postik.core.label import _aspect_fit, detect_label_bbox, embed_labels
+from postik.core.layouts import DEFAULT
+from postik.core.models import Address, Order
+from postik.core.pipeline import build_pdf
+from postik.core.preview import page_count, render_page
+from postik.core.sheets import AMAZON_A4_4UP as S
 
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
 

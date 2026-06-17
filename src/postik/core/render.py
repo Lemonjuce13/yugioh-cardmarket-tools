@@ -1,7 +1,7 @@
 """ReportLab rendering of the base sticker sheet (text only) and the calibration sheet.
 
 The franking label slot is intentionally left blank here; it is filled afterwards by
-:mod:`yugioh_shipping.core.label` (PyMuPDF) so the DataMatrix stays crisp/vector.
+:mod:`postik.core.label` (PyMuPDF) so the DataMatrix stays crisp/vector.
 
 All public functions return PDF ``bytes`` so every frontend can consume them without touching
 the filesystem.

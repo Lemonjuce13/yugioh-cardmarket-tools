@@ -26,7 +26,7 @@ from ..core.preview import render_page
 from ..core.sheets import get_sheet, list_sheets
 from ..io import cardmarket
 
-app = FastAPI(title="YuGiOh Shipping", version="0.1.0")
+app = FastAPI(title="Postik", version="0.1.0")
 
 
 class OrderIn(BaseModel):

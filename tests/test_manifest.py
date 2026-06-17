@@ -9,7 +9,7 @@ import pytest
 
 from samples import ENVELOPE
 
-from yugioh_shipping.io.manifest import load_manifest
+from postik.io.manifest import load_manifest
 
 
 def test_json_inline_list_and_string(tmp_path):

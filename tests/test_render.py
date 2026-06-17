@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import fitz
 
-from yugioh_shipping.core.models import Address, Order
-from yugioh_shipping.core.pipeline import build_pdf
-from yugioh_shipping.core.preview import page_count
-from yugioh_shipping.core.render import _fit_font_size
-from yugioh_shipping.core.sheets import AMAZON_A4_4UP as S
+from postik.core.models import Address, Order
+from postik.core.pipeline import build_pdf
+from postik.core.preview import page_count
+from postik.core.render import _fit_font_size
+from postik.core.sheets import AMAZON_A4_4UP as S
 
 PT = 72.0 / 25.4
 

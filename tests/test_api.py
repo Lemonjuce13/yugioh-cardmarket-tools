@@ -10,7 +10,7 @@ from fastapi.testclient import TestClient
 
 from samples import ENVELOPE, LABEL
 
-from yugioh_shipping.api.main import app
+from postik.api.main import app
 
 client = TestClient(app)
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
@@ -41,7 +41,7 @@ def test_put_config_persists_and_reads_back(tmp_path, monkeypatch):
     monkeypatch.setenv("XDG_CONFIG_HOME", str(tmp_path))
     r = client.put("/config", json={"sender_lines": ["Me", "Street 1", "12345 City", "Germany"]})
     assert r.status_code == 200
-    assert (tmp_path / "yugioh_shipping" / "config.json").exists()
+    assert (tmp_path / "postik" / "config.json").exists()
     assert client.get("/config").json()["sender_lines"][0] == "Me"
 
 

@@ -5,11 +5,11 @@ from __future__ import annotations
 import fitz
 import pytest
 
-from yugioh_shipping.core.layouts import DEFAULT
-from yugioh_shipping.core.models import Address, Order, normalize_porto_code
-from yugioh_shipping.core.pipeline import assign_slots, build_calibration_pdf, build_pdf
-from yugioh_shipping.core.preview import page_count
-from yugioh_shipping.core.sheets import AMAZON_A4_4UP as S
+from postik.core.layouts import DEFAULT
+from postik.core.models import Address, Order, normalize_porto_code
+from postik.core.pipeline import assign_slots, build_calibration_pdf, build_pdf
+from postik.core.preview import page_count
+from postik.core.sheets import AMAZON_A4_4UP as S
 
 
 def test_sticker_rects_stack_vertically():

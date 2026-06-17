@@ -4,23 +4,23 @@ Examples
 --------
 Interactive::
 
-    python -m yugioh_shipping -i
+    python -m postik -i
 
-One order from a Cardmarket envelope PDF + a porto code, starting at sticker 3::
+One order from an order-export PDF (e.g. a Cardmarket envelope) + a porto code, from sticker 3::
 
-    python -m yugioh_shipping --recipient-pdf envelope-123.pdf --porto CVNKP8VN --start 3 -o out.pdf
+    python -m postik --recipient-pdf envelope-123.pdf --porto CVNKP8VN --start 3 -o out.pdf
 
 A high-value order with an Einschreiben franking label::
 
-    python -m yugioh_shipping --recipient-pdf Sale_#123.pdf --tracking Briefmarken.123.pdf
+    python -m postik --recipient-pdf Sale_#123.pdf --tracking Briefmarken.123.pdf
 
 Batch from a manifest::
 
-    python -m yugioh_shipping --manifest orders.json -o sheet.pdf
+    python -m postik --manifest orders.json -o sheet.pdf
 
 Calibration sheet (print at 100% to tune the constants)::
 
-    python -m yugioh_shipping --calibration -o calibration.pdf
+    python -m postik --calibration -o calibration.pdf
 """
 
 from __future__ import annotations
@@ -41,12 +41,12 @@ from ..io.manifest import load_manifest
 
 def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        prog="yugioh-shipping",
-        description="Generate a print-ready DIN A4 shipping-sticker sheet for Cardmarket orders.",
+        prog="postik",
+        description="Generate a print-ready DIN A4 address/postage sticker sheet.",
     )
     p.add_argument("-i", "--interactive", action="store_true", help="step-by-step prompts")
     p.add_argument("--recipient-pdf", action="append", default=[], metavar="PDF",
-                   help="Cardmarket envelope/Sale PDF (repeatable)")
+                   help="order-export PDF, e.g. a Cardmarket envelope/Sale PDF (repeatable)")
     p.add_argument("--recipient", action="append", default=[], metavar="TEXT",
                    help="inline recipient; use \\n between lines (repeatable)")
     p.add_argument("--porto", action="append", default=[], metavar="CODE",

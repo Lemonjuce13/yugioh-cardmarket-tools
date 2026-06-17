@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from yugioh_shipping.core.models import Address, normalize_porto_code
+from postik.core.models import Address, normalize_porto_code
 
 
 def test_address_from_text_strips_and_drops_blanks():

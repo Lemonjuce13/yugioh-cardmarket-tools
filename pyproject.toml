@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "yugioh-shipping"
+name = "postik"
 version = "0.1.0"
-description = "Generate print-ready DIN A4 shipping-sticker sheets for Cardmarket Yu-Gi-Oh! orders"
+description = "Generate print-ready DIN A4 address/postage sticker sheets for small-seller shipping"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -20,7 +20,7 @@ dependencies = [
 dev = ["pytest>=8.0"]
 
 [project.scripts]
-yugioh-shipping = "yugioh_shipping.cli.app:main"
+postik = "postik.cli.app:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

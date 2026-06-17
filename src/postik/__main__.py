@@ -1,4 +1,4 @@
-"""Entry point: ``python -m yugioh_shipping``."""
+"""Entry point: ``python -m postik``."""
 
 from .cli.app import main
 

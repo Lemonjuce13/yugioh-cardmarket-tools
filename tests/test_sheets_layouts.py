@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import pytest
 
-from yugioh_shipping.core.layouts import DEFAULT, get_layout, list_layouts
-from yugioh_shipping.core.sheets import AMAZON_A4_4UP as S
-from yugioh_shipping.core.sheets import get_sheet, list_sheets
+from postik.core.layouts import DEFAULT, get_layout, list_layouts
+from postik.core.sheets import AMAZON_A4_4UP as S
+from postik.core.sheets import get_sheet, list_sheets
 
 
 def test_get_sheet_ok():

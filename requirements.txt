@@ -1,8 +1,8 @@
-# Runtime dependencies for the Cardmarket shipping-sticker tool
+# Runtime dependencies for Postik (address/postage sticker-sheet tool)
 # Install (inside the WSL venv):  pip install -r requirements.txt
 
 reportlab>=4.0          # mm-precise PDF drawing (base sheet + text + calibration)
-pymupdf>=1.24           # read Cardmarket PDFs, crop+embed the franking label, PNG preview
+pymupdf>=1.24           # read order-export PDFs, crop+embed the franking label, PNG preview
 fastapi>=0.110          # thin HTTP boundary (engine stub for a future Flutter/web frontend)
 uvicorn>=0.29           # ASGI server to run the FastAPI app
 python-multipart>=0.0.9 # file uploads for the /parse and /generate endpoints

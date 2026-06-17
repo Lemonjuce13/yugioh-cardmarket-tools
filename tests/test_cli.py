@@ -9,7 +9,7 @@ import pytest
 
 from samples import ENVELOPE
 
-from yugioh_shipping.cli.app import main
+from postik.cli.app import main
 
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
 
