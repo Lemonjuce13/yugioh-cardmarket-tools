@@ -15,6 +15,7 @@ import base64
 from dataclasses import asdict
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel
 
@@ -27,6 +28,15 @@ from ..core.sheets import get_sheet, list_sheets
 from ..io import cardmarket
 
 app = FastAPI(title="Postik", version="0.1.0")
+
+# Dev-permissive CORS so the Flutter Web client (served from a different localhost port) can
+# call the API. Tighten allow_origins for any real deployment.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class OrderIn(BaseModel):

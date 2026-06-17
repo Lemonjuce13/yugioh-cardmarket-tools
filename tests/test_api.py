@@ -16,6 +16,18 @@ client = TestClient(app)
 PNG_MAGIC = b"\x89PNG\r\n\x1a\n"
 
 
+def test_cors_preflight_allows_browser_origin():
+    r = client.options(
+        "/generate",
+        headers={
+            "Origin": "http://localhost:5000",
+            "Access-Control-Request-Method": "POST",
+        },
+    )
+    assert r.status_code in (200, 204)
+    assert r.headers.get("access-control-allow-origin") == "*"
+
+
 def test_get_sheets():
     r = client.get("/sheets")
     assert r.status_code == 200
